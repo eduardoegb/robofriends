@@ -4,7 +4,7 @@ import tachyons from 'tachyons';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-import App from './App';
+import App from './containers/App';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

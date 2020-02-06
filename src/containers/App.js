@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import CardList from './CardList';
-import SearchBox from './SearchBox';
+import CardList from '../components/CardList';
+import SearchBox from '../components/SearchBox';
+import Scroll from '../components/Scroll';
 import './App.css';
-import { robots } from './robots';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      robots: robots,
+      robots: [],
       searchfield: ''
     };
   }
@@ -23,14 +23,28 @@ class App extends Component {
         .toLowerCase()
         .includes(this.state.searchfield.toLowerCase());
     });
-
-    return (
+    return !this.state.robots.length ? (
+      <div className="centered">
+        <div className="lds-ripple">
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    ) : (
       <div className="tc">
         <h1 className="f2">RoboFriends</h1>
         <SearchBox searchChange={this.onSearchChange} />
-        <CardList robots={filteredRobots} />
+        <Scroll>
+          <CardList robots={filteredRobots} />
+        </Scroll>
       </div>
     );
+  }
+
+  componentDidMount() {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(users => this.setState({ robots: users }));
   }
 }
 
