@@ -2,9 +2,9 @@ import React, { Fragment } from 'react';
 import Card from './Card';
 
 const CardList = ({ robots }) => {
-  if (true) {
-    throw new Error('NOOOOO');
-  }
+  // if (true) {
+  //   throw new Error('NOOOOO');
+  // }
   return (
     <Fragment>
       {robots.map(robot => {
